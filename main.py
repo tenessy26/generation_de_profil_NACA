@@ -26,7 +26,7 @@ def calculer_position_max(up,down,nb_points,longueur_corde):
     max = np.max(up[:,1])  # extraction de la valeur max de l'extrados en y
     min = np.min(down[:,1]) # extraction de la valeur max de l'intrados en y
     epaisseur = max - min # obtention de la distance entre ymax et ymin
-    print("L'épaisseur max du profil d'aile calculé est de " + str(epaisseur) + " mètres.\n")
+    print("\nL'épaisseur max du profil d'aile calculé est de " + str(epaisseur) + " mètres. ")
 
     # Calcul et affichage de la position de ce max
     indice_max = np.argmax(up[:,1]) # extraction de l'indice de la valeur max de l'extrados en y (le profil est symétrique donc on a besoin seulement d'un seul tableau)
@@ -34,14 +34,14 @@ def calculer_position_max(up,down,nb_points,longueur_corde):
     position_max = (pourcentage_de_corde*longueur_corde)/100
     print("La position de ce maximum est à " + str(pourcentage_de_corde) +"% de la longueur totale de la corde, soit à "+str(position_max)+" mètres.")
     return
-def construire_tableau(num_profil = '0033',longueur_corde = float(6), nb_points = 150, distrib_type = "linéaire"):
+def construire_tableaux_de_coordonnees(num_profil,longueur_corde,nb_points, distrib_type):
 
     xx = num_profil[-2] + num_profil[-1]  # On récupère seulement les 2 derniers éléments du numéro de profil
     t = float(xx) / 100.0
 
-    if distrib_type == 'linéaire':       # Choix du type de distrib comme précisé dans l'énoncé
+    if distrib_type == 1:       # Choix du type de distrib comme précisé dans l'énoncé
         xc = np.linspace(0, 1, nb_points)   # On utilise la méthode 'linspace()' pour créer notre vecteur de 'nb_points' valeurs entre 0 et 1
-    elif distrib_type == 'non-uniforme':
+    elif distrib_type == 2:
         teta = np.linspace(0, np.pi, nb_points)
         xc = 0.5 * (1 - np.cos(teta))
 
@@ -63,11 +63,11 @@ def construire_tableau(num_profil = '0033',longueur_corde = float(6), nb_points 
 
 def main():
 
-    #num_profil = input("Saississez le numéro du profil NACA a 4 chiffres symétrique : ")
-    #longueur_corde = float(input("Entrez la longueur de la corde du profil (en mètre): "))
-    #nb_points = int(input("Choisissez le nombre de points souhaité le long de la corde pour le tracé: "))
-    #distrib_type = input("Choisissez un type de distribution (linéaire ou non-uniforme): ").strip().lower()
-    construire_tableau()
+    num_profil = input("Saississez le numéro du profil NACA a 4 chiffres symétrique : ")
+    longueur_corde = float(input("Entrez la longueur de la corde du profil (en mètre): "))
+    nb_points = int(input("Choisissez le nombre de points souhaité le long de la corde pour le tracé: "))
+    distrib_type = int(input("Pour une distribution linéaire tapez 1\nPour une distribution non-uniforme tapez 2\nVotre choix : "))
+    construire_tableaux_de_coordonnees(num_profil,longueur_corde,nb_points,distrib_type)
     return
 
 main()
