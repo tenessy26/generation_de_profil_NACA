@@ -14,7 +14,7 @@ def afficher_forme_profil(intrados, extrados):
     plt.ylabel('y')  # on définit le label de l'axis y
     plt.legend()  # on spécifie que l'on veut une légende
     plt.grid()  # on spécifie que l'on veut une grille
-    plt.title("Profile d'aile NACA symétrique")  # on spécifie que l'on veut un titre
+    plt.title("Forme du profil d'aile")  # on spécifie que l'on veut un titre
     plt.show()  # on affiche la sourbe pour l'objet plt en cours de modification
     return
 def construire_tableau(num_profil,longueur_corde, nb_points, distrib_type):
